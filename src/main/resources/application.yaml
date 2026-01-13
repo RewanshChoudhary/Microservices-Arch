@@ -20,4 +20,8 @@ spring:
     init:
       mode: never
 
+Bank-Address:
+  add1: 
+      "Delhi"
+
 

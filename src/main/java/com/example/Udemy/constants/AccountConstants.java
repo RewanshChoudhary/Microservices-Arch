@@ -1,8 +1,8 @@
 package com.example.Udemy.constants;
 
 public class AccountConstants{
-  private AccountConstants() {
-        
+    private AccountConstants() {
+
     }
 
     public static final String SUCCESS = "200";
@@ -10,7 +10,7 @@ public class AccountConstants{
     public static final String BAD_REQUEST = "400";
     public static final String NOT_FOUND = "404";
     public static final String CONFLICT = "409";
-  public static final String INTERNAL_SERVER_ERROR = "500";  
+    public static final String INTERNAL_SERVER_ERROR = "500";
     public static final String ACCOUNT_CREATED =
             "Account created successfully";
 
@@ -27,5 +27,5 @@ public class AccountConstants{
             "Account not found";
 
     public static final String ACCOUNT_ALREADY_EXISTS =
-            "Account already exists for the customer";    
+            "Account already exists for the customer";
 }
