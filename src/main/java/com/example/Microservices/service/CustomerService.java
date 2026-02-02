@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.Microservices.dto.CustomerDto;
 import com.example.Microservices.exceptions.CustomerAlreadyExistsException;
+import com.example.Microservices.exceptions.ResourceNotFoundException;
 import com.example.Microservices.mapper.CustomerMapper;
 import com.example.Microservices.model.Customer;
 import com.example.Microservices.repository.CustomerRepository;
@@ -19,20 +20,20 @@ public class CustomerService implements ICustomerService {
   private final CustomerRepository customerRepository;
 
   @Override
-  public void createCustomer(CustomerDto dto, boolean check) throws CustomerAlreadyExistsException {
-    if (check) {
-      Optional<Boolean> present = customerRepository.findByEmail(dto.getEmail());
-
-      if (present.isPresent()) {
-        throw new CustomerAlreadyExistsException("Customer already exists :  While creating a user");
-
-      }
-    }
-
+  public void createCustomer(CustomerDto dto) {
+    Customer cust = customerRepository.findByEmail(dto.getEmail())
+        .orElseThrow(() -> new ResourceNotFoundException(
+            "Customer", "email", dto.getEmail()));
     Customer customer = CustomerMapper.toEntity(dto);
 
     customerRepository.save(customer);
 
+  }
+
+  @Override
+  public CustomerDto fetchCustomer(String email) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

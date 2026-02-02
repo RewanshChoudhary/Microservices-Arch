@@ -4,6 +4,8 @@ import com.example.Microservices.dto.CustomerDto;
 import com.example.Microservices.exceptions.CustomerAlreadyExistsException;
 
 public interface ICustomerService {
-  void createCustomer(CustomerDto dto, boolean check);
+  void createCustomer(CustomerDto dto);
+
+  CustomerDto fetchCustomer(String email);
 
 }
