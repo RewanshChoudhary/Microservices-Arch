@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.Microservices.dto.AccountsDto;
 import com.example.Microservices.dto.CustomerDto;
-import com.example.Microservices.exceptions.CustomerAlreadyExistsException;
 import com.example.Microservices.exceptions.ResourceNotFoundException;
 import com.example.Microservices.mapper.AccountMapper;
 import com.example.Microservices.mapper.CustomerMapper;
@@ -24,17 +23,16 @@ import lombok.RequiredArgsConstructor;
 
 public class AccountsService implements IAccountsService {
   private final CustomerRepository customerRepository;
-  private final CustomerService customerService;
 
   private final AccountsRepository accountsRepository;
 
-  public void createAccount(CustomerDto dto) throws CustomerAlreadyExistsException {
-    Optional<Boolean> present = customerRepository.findByEmail(dto.getEmail());
+  public void createAccount(CustomerDto dto) {
+    Optional<Customer> cust = customerRepository.findByEmail(dto.getEmail());
 
-    if (!present.isPresent()) {
-      customerService.createCustomer(dto, false);
+    if (!cust.isPresent()) {
+      throw new ResourceNotFoundException("User", "Email", dto.getEmail());
+
     }
-
     Accounts acc = Accounts.builder()
         .branchAddress("Delhi")
         .accountType("SAVINGS")
