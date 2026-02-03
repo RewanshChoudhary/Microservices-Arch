@@ -16,6 +16,7 @@ import com.example.Microservices.repository.AccountsRepository;
 import com.example.Microservices.repository.CustomerRepository;
 import com.example.Microservices.service.interfaces.IAccountsService;
 
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -37,7 +38,10 @@ public class AccountsService implements IAccountsService {
         .branchAddress("Delhi")
         .accountType("SAVINGS")
         .accountNumber(next())
+        .customer(cust.get())
         .build();
+    cust.get().getAccounts().add(acc);
+
     accountsRepository.save(acc);
 
   }
@@ -49,7 +53,7 @@ public class AccountsService implements IAccountsService {
   }
 
   @Override
-  public CustomerDto fetchAccount(String mobileNumber) throws ResourceNotFoundException {
+  public CustomerDto fetchAccount(String accNo, String mobileNumber) throws ResourceNotFoundException {
 
     Customer customer = customerRepository.findByMobileNumber(mobileNumber)
         .orElseThrow(() -> new ResourceNotFoundException(
@@ -57,11 +61,11 @@ public class AccountsService implements IAccountsService {
             "mobileNumber",
             mobileNumber));
 
-    Accounts acc = accountsRepository.findByMobileNumber(mobileNumber)
+    Accounts acc = accountsRepository.findByAccountNumber(accNo)
         .orElseThrow(() -> new ResourceNotFoundException(
             "Account",
-            "mobileNumber",
-            mobileNumber));
+            "Account Number ",
+            accNo));
     CustomerDto custDto = CustomerMapper.toDto(customer);
     AccountsDto accDto = AccountMapper.toDto(acc);
     custDto.setAccountsDto(accDto);

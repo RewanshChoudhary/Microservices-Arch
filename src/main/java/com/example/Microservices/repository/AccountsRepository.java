@@ -8,6 +8,7 @@ import com.example.Microservices.model.Accounts;
 
 public interface AccountsRepository extends JpaRepository<Accounts, Long> {
 
-  Optional<Accounts> findByMobileNumber(String mobileNumber);
+  Optional<Accounts> findByAccountNumber(String accountNo);
+
 
 }

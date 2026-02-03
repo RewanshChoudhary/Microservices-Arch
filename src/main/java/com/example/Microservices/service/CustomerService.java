@@ -1,11 +1,8 @@
 package com.example.Microservices.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.example.Microservices.dto.CustomerDto;
-import com.example.Microservices.exceptions.CustomerAlreadyExistsException;
 import com.example.Microservices.exceptions.ResourceNotFoundException;
 import com.example.Microservices.mapper.CustomerMapper;
 import com.example.Microservices.model.Customer;
@@ -25,6 +22,7 @@ public class CustomerService implements ICustomerService {
         .orElseThrow(() -> new ResourceNotFoundException(
             "Customer", "email", dto.getEmail()));
     Customer customer = CustomerMapper.toEntity(dto);
+    
 
     customerRepository.save(customer);
 
@@ -32,8 +30,11 @@ public class CustomerService implements ICustomerService {
 
   @Override
   public CustomerDto fetchCustomer(String email) {
-    // TODO Auto-generated method stub
-    return null;
+    Customer cust = customerRepository.findByEmail(email)
+        .orElseThrow(() -> new ResourceNotFoundException("Customer", "email", email));
+    CustomerDto dto = CustomerMapper.toDto(cust);
+    return dto;
+
   }
 
 }
