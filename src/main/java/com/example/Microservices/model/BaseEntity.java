@@ -2,29 +2,46 @@ package com.example.Microservices.model;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @Data
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
+public abstract class BaseEntity {
 
-public class BaseEntity {
-  @Column(updatable = false)
+  @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-  @Column(updatable = false)
+
+  private LocalDateTime updatedAt;
+
+  @Column(nullable = false, updatable = false)
   private String createdBy;
-  @Column(insertable = false)
-  private LocalDateTime UpdatedAt;
-  @Column(insertable = false)
 
   private String updatedBy;
 
+  @PrePersist
+  protected void onCreate() {
+    this.createdAt = LocalDateTime.now();
+  }
 
+  @PreUpdate
+  protected void onUpdate() {
+    this.updatedAt = LocalDateTime.now();
+  }
 }

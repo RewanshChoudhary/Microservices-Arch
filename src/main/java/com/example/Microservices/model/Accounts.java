@@ -10,15 +10,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class Accounts extends BaseEntity {
-  @Column(name = "customer_id", nullable = false)
-  private Long customerId;
 
   @Id
   @Column(name = "account_number")

@@ -14,12 +14,14 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Data
 @AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
-public class Customer {
+public class Customer extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long customerId;

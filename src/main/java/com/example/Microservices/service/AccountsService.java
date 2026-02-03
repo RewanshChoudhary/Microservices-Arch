@@ -39,6 +39,9 @@ public class AccountsService implements IAccountsService {
         .accountType("SAVINGS")
         .accountNumber(next())
         .customer(cust.get())
+        .createdBy(dto.getEmail())
+        .updatedBy(null)
+
         .build();
     cust.get().getAccounts().add(acc);
 

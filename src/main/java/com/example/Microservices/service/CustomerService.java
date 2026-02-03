@@ -21,8 +21,13 @@ public class CustomerService implements ICustomerService {
     Customer cust = customerRepository.findByEmail(dto.getEmail())
         .orElseThrow(() -> new ResourceNotFoundException(
             "Customer", "email", dto.getEmail()));
-    Customer customer = CustomerMapper.toEntity(dto);
-    
+    Customer customer = Customer.builder().email(dto.getEmail())
+        .name(dto.getName())
+        .accounts(null)
+        .mobileNumber(dto.getMobileNumber())
+        .createdBy(dto.getEmail())
+        .updatedBy(dto.getEmail())
+        .build();
 
     customerRepository.save(customer);
 
