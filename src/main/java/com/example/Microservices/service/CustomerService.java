@@ -1,5 +1,7 @@
 package com.example.Microservices.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.Microservices.dto.CustomerDto;
@@ -39,4 +41,18 @@ public class CustomerService implements ICustomerService {
 
   }
 
+  public void updateCustomer(String email, CustomerDto customerDto) {
+
+    Optional<Customer> cust = customerRepository.findByEmail(email);
+    if (!cust.isPresent()) {
+      throw new ResourceNotFoundException("User", "Email", email);
+
+    }
+
+    Customer user = cust.get();
+    user.setEmail(customerDto.getEmail());
+    user.setMobileNumber(customerDto.getMobileNumber());
+    user.setName(customerDto.getName());
+
+  }
 }

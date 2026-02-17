@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Microservices.constants.AccountConstants;
+import com.example.Microservices.dto.AccountsDto;
 import com.example.Microservices.dto.CustomerDto;
 import com.example.Microservices.dto.ResponseDto;
 import com.example.Microservices.service.CustomerService;
@@ -56,8 +57,9 @@ public class AccountsController {
   }
 
   @PutMapping("/update")
-  public ResponseEntity<ResponseDto> updateAccount(@RequestBody CustomerDto customerDto) {
-    CustomerService.updateAccount(customerDto);
+  public ResponseEntity<ResponseDto> updateAccount(@RequestParam String accountNo,
+      @RequestBody AccountsDto accountsDto) {
+    accountsService.updateAccount(accountNo, accountsDto);
 
     return ResponseEntity.status(HttpStatus.ACCEPTED)
         .body(new ResponseDto(
