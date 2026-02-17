@@ -2,8 +2,6 @@ package com.example.Microservices.dto;
 
 import java.util.List;
 
-import com.example.Microservices.model.Accounts;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -27,11 +25,6 @@ public class CustomerDto {
 
   @NotBlank(message = "Mobile number must not be blank")
   private String mobileNumber;
-  private List<Accounts> accounts;
-
-  private AccountsDto accountsDto;
-
-  private List<Accounts> account;
-
+  private List<AccountsDto> accounts;
 
 }

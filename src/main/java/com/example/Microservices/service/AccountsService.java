@@ -17,6 +17,7 @@ import com.example.Microservices.repository.CustomerRepository;
 import com.example.Microservices.service.interfaces.IAccountsService;
 
 import jakarta.annotation.Resource;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -43,7 +44,6 @@ public class AccountsService implements IAccountsService {
         .updatedBy(null)
 
         .build();
-    cust.get().getAccounts().add(acc);
 
     accountsRepository.save(acc);
 
@@ -71,8 +71,25 @@ public class AccountsService implements IAccountsService {
             accNo));
     CustomerDto custDto = CustomerMapper.toDto(customer);
     AccountsDto accDto = AccountMapper.toDto(acc);
-    custDto.setAccountsDto(accDto);
+    custDto.getAccounts().add(accDto);
+
     return custDto;
+
+  }
+
+  @Override
+  @Transactional
+  public void updateAccount(String accountNo, AccountsDto accountsDto) {
+    Optional<Accounts> acc = accountsRepository.findByAccountNumber(accountNo);
+
+    if (!acc.isPresent()) {
+      throw new ResourceNotFoundException("Account", "accountNo", accountNo);
+
+    }
+    Accounts currAcc = acc.get();
+    currAcc.setAccountType(accountsDto.getAccountType());
+    currAcc.setBranchAddress(accountsDto.getBranchAddress());
+    currAcc.setAccountNumber(accountsDto.getAccountNumber());
 
   }
 }

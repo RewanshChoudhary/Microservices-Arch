@@ -18,9 +18,6 @@ public class CustomerService implements ICustomerService {
 
   @Override
   public void createCustomer(CustomerDto dto) {
-    Customer cust = customerRepository.findByEmail(dto.getEmail())
-        .orElseThrow(() -> new ResourceNotFoundException(
-            "Customer", "email", dto.getEmail()));
     Customer customer = Customer.builder().email(dto.getEmail())
         .name(dto.getName())
         .accounts(null)
