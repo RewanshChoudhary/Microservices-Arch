@@ -11,10 +11,12 @@ import com.example.Microservices.model.Customer;
 import com.example.Microservices.repository.CustomerRepository;
 import com.example.Microservices.service.interfaces.ICustomerService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+
 public class CustomerService implements ICustomerService {
   private final CustomerRepository customerRepository;
 
@@ -40,7 +42,7 @@ public class CustomerService implements ICustomerService {
     return dto;
 
   }
-
+  @Transactional
   public void updateCustomer(String email, CustomerDto customerDto) {
 
     Optional<Customer> cust = customerRepository.findByEmail(email);
@@ -50,7 +52,7 @@ public class CustomerService implements ICustomerService {
     }
 
     Customer user = cust.get();
-    user.setEmail(customerDto.getEmail());
+
     user.setMobileNumber(customerDto.getMobileNumber());
     user.setName(customerDto.getName());
 

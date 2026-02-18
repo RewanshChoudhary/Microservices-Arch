@@ -9,5 +9,6 @@ public interface ICustomerService {
   void createCustomer(CustomerDto dto);
 
   CustomerDto fetchCustomer(String email);
+ void updateCustomer(String email,CustomerDto customerDto);
 
 }
