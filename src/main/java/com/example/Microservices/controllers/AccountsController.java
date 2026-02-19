@@ -1,7 +1,5 @@
 package com.example.Microservices.controllers;
 
-import javax.swing.text.DefaultEditorKit.CutAction;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +14,6 @@ import com.example.Microservices.constants.AccountConstants;
 import com.example.Microservices.dto.AccountsDto;
 import com.example.Microservices.dto.CustomerDto;
 import com.example.Microservices.dto.ResponseDto;
-import com.example.Microservices.service.CustomerService;
 import com.example.Microservices.service.interfaces.IAccountsService;
 
 import lombok.RequiredArgsConstructor;
