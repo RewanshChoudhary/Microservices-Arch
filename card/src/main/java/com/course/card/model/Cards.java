@@ -2,6 +2,10 @@ package com.course.card.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,14 +49,18 @@ public class Cards {
   private Integer availableAmount;
 
   @Column(name = "created_at", updatable = false)
+  @CreationTimestamp
   private LocalDateTime createdAt;
 
   @Column(name = "created_by")
+  @CreatedBy
   private String createdBy;
 
   @Column(name = "updated_by")
   private String updatedBy;
 
   @Column(name = "updated_at")
+  @LastModifiedDate
+  
   private LocalDateTime updatedAt;
 }
