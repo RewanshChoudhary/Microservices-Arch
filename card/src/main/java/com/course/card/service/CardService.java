@@ -53,4 +53,13 @@ public class CardService {
     card.setTotalLimit(cardRequestDto.getTotalLimit());
 
   }
+
+  public void deleteCard(String mobileNumber, String cardNumber) {
+
+    Optional<Cards> entry = cardRepository.findByCardNumber(cardNumber);
+    if (!entry.isPresent())
+      throw new ResourceNotFoundException("Card", "Card number ", cardNumber);
+    cardRepository.delete(entry.get());
+
+  }
 }

@@ -2,6 +2,7 @@ package com.course.card.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,4 +48,14 @@ public class CardController {
         .body(new ResponseDto(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
 
   }
+
+  @DeleteMapping
+  public ResponseEntity<ResponseDto> updateCard(@RequestParam String mobileNumber, @RequestParam String cardNumber) {
+    cardService.deleteCard(mobileNumber, cardNumber);
+
+    return ResponseEntity.status(HttpStatus.ACCEPTED)
+        .body(new ResponseDto(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
+
+  }
+
 }

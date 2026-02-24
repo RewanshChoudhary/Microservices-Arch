@@ -11,4 +11,6 @@ import com.course.card.model.Cards;
 public interface CardRepository extends JpaRepository<Cards, Integer> {
   Optional<Cards> findByMobileNumber(String mobileNumber);
 
+  Optional<Cards> findByCardNumber(String cardNumber);
+
 }
