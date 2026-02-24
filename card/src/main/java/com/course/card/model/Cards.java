@@ -18,7 +18,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+
 @AllArgsConstructor
+
 @NoArgsConstructor
 @Builder
 @Entity
@@ -61,6 +63,6 @@ public class Cards {
 
   @Column(name = "updated_at")
   @LastModifiedDate
-  
+
   private LocalDateTime updatedAt;
 }
