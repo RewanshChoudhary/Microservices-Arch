@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: microservice
+    environment:
+      POSTGRES_USER: rewansh
+      POSTGRES_PASSWORD: rootrewansh
+      POSTGRES_DB: localdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rewansh -d localdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  accounts:
+    image: rc/accounts:s4
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/localdb
+      DB_USER: rewansh
+      DB_PASSWORD: rootrewansh
+volumes:
+  postgres_data:
