@@ -1,13 +1,9 @@
 spring:
-  application:
-    name: accounts
   datasource:
     url: ${DB_URL}
-
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
@@ -18,11 +14,12 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC
-
   sql:
     init:
       mode: never
-  api:
-     version : "1"
+
+api:
+  version: "1"
+
 Bank-Address:
   add1: "Delhi"
