@@ -1,5 +1,6 @@
 package com.example.Microservices.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(path = "/api/accounts")
 @RequiredArgsConstructor
 public class AccountsController {
+  @Value("${spring.api.version}")
+  private String buildVersion;
 
   private final IAccountsService accountsService;
 
@@ -76,6 +79,13 @@ public class AccountsController {
             AccountConstants.SUCCESS,
             AccountConstants.ACCOUNT_DELETED,
             null));
+
+  }
+
+  @GetMapping
+  public ResponseEntity<ResponseDto> getBuildVersion() {
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(new ResponseDto(AccountConstants.SUCCESS, "200", buildVersion));
 
   }
 

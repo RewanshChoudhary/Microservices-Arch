@@ -20,6 +20,7 @@ spring:
   sql:
     init:
       mode: never
-
+  api:
+     version : "1"
 Bank-Address:
   add1: "Delhi"
