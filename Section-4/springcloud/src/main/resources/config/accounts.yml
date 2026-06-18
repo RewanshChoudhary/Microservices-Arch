@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/localdb
+    url: jdbc:postgresql://localhost:5432/mydb
     username: rewansh
     password: rootrewansh
     driver-class-name: org.postgresql.Driver

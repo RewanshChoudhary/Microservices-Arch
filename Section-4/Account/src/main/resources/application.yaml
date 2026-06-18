@@ -1,12 +1,9 @@
 spring:
+
+
   application:
     name: accounts
-  datasource:
-    url: ${DB_URL}
 
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -23,6 +20,8 @@ spring:
     init:
       mode: never
   api:
-     version : "1"
+    version: "1"
+  config:
+    import: "optional:configserver:http://localhost:8071"
 Bank-Address:
   add1: "Delhi"
