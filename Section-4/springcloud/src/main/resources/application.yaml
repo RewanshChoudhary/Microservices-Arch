@@ -3,11 +3,25 @@ server:
 
 spring:
   application:
-    name: springcloud
+    name: spring cloud
+
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config
-  profiles:
-    active: native
+        prefix: /config
+        git:
+          uri: https://github.com/RewanshChoudhary/Dummy.git
+          clone-on-start: true
+          default-label: main
+          force-pull: true
+
+encrypt:
+  key: mySecretKeyForDemo123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
